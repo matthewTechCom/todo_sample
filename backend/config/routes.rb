@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   devise_for :users,
-             path: "auth",
+             path: "api/v1/auth",
              path_names: { sign_in: "login", sign_out: "logout" },
              controllers: { sessions: "users/sessions" },
              skip: [:registrations]
 
   devise_scope :user do
-    post "auth/signup", to: "users/registrations#create"
+    post "api/v1/auth/signup", to: "users/registrations#create"
   end
 
   namespace :api do

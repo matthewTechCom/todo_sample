@@ -6,7 +6,7 @@ class AuthFlowTest < ActionDispatch::IntegrationTest
     email = "signup-#{SecureRandom.hex(4)}@example.com"
     password = "password123"
 
-    post "/auth/signup", params: {
+    post "/api/v1/auth/signup", params: {
       user: {
         email: email,
         password: password,
@@ -25,7 +25,7 @@ class AuthFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal email, response.parsed_body.dig("user", "email")
 
-    delete "/auth/logout", headers: { "Authorization" => auth_header }, as: :json
+    delete "/api/v1/auth/logout", headers: { "Authorization" => auth_header }, as: :json
     assert_response :no_content
 
     get "/api/v1/me", headers: { "Authorization" => auth_header }, as: :json
@@ -40,7 +40,7 @@ class AuthFlowTest < ActionDispatch::IntegrationTest
       password_confirmation: password
     )
 
-    post "/auth/login", params: {
+    post "/api/v1/auth/login", params: {
       user: {
         email: user.email,
         password: password

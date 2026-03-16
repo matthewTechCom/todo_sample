@@ -274,13 +274,13 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = ENV.fetch("DEVISE_JWT_SECRET_KEY", Rails.application.secret_key_base)
     jwt.dispatch_requests = [
-      ["POST", %r{^/auth/login$}],
-      ["POST", %r{^/auth/signup$}]
+      ["POST", %r{^/api/v1/auth/login$}],
+      ["POST", %r{^/api/v1/auth/signup$}]
     ]
     jwt.revocation_requests = [
-      ["DELETE", %r{^/auth/logout$}]
+      ["DELETE", %r{^/api/v1/auth/logout$}]
     ]
-    jwt.request_formats = { user: [:json] }
+    jwt.request_formats = { user: [nil, :json] }
   end
 
   # ==> OmniAuth
