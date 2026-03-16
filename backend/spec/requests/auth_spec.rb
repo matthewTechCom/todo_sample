@@ -103,6 +103,7 @@ RSpec.describe "Auth API", type: :request do
       tags "Auth"
       produces "application/json"
       security [bearerAuth: []]
+      parameter name: :Authorization, in: :header, schema: { type: :string }, required: false
 
       response "204", "logout success" do
         let!(:user) do
@@ -117,6 +118,18 @@ RSpec.describe "Auth API", type: :request do
           post "/api/v1/auth/login", params: { user: { email: user.email, password: "password123" } }, as: :json
           response.headers["Authorization"]
         end
+
+        run_test!
+      end
+
+      response "401", "logout unauthorized" do
+        let(:Authorization) { nil }
+
+        run_test!
+      end
+
+      response "401", "logout with invalid token" do
+        let(:Authorization) { "Bearer invalid.token.value" }
 
         run_test!
       end

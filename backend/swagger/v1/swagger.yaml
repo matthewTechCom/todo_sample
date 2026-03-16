@@ -78,11 +78,19 @@ paths:
       summary: Logout user
       tags:
       - Auth
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
       security:
       - bearerAuth: []
       responses:
         '204':
           description: logout success
+        '401':
+          description: logout unauthorized
   "/api/v1/me":
     get:
       summary: Get current user
