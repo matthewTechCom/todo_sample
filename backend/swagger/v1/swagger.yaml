@@ -3,8 +3,47 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
-  "/auth/login":
+  "/api/v1/auth/signup":
+    post:
+      summary: Sign up user and return JWT
+      tags:
+      - Auth
+      parameters: []
+      responses:
+        '201':
+          description: signup success
+        '422':
+          description: signup failure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                  required:
+                  - email
+                  - password
+                  - password_confirmation
+              required:
+              - user
+  "/api/v1/auth/login":
     post:
       summary: Login user and return JWT
       tags:
@@ -34,5 +73,27 @@ paths:
                   - password
               required:
               - user
+  "/api/v1/auth/logout":
+    delete:
+      summary: Logout user
+      tags:
+      - Auth
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: logout success
+  "/api/v1/me":
+    get:
+      summary: Get current user
+      tags:
+      - Users
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: current user fetched
+        '401':
+          description: unauthorized
 servers:
 - url: http://localhost:3001
