@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  if defined?(Rswag::Ui::Engine) && defined?(Rswag::Api::Engine)
+    mount Rswag::Ui::Engine => "/api-docs"
+    mount Rswag::Api::Engine => "/api-docs"
+  end
+
   devise_for :users,
              path: "api/v1/auth",
              path_names: { sign_in: "login", sign_out: "logout" },

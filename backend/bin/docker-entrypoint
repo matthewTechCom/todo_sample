@@ -1,7 +1,15 @@
 #!/bin/bash -e
 
-# If running the rails server then create or migrate existing database
+# Prepare the database before starting the app server in containers.
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  ./bin/rails db:prepare
+fi
+
+if [ "${1}" == "bundle" ] && [ "${2}" == "exec" ] && [ "${3}" == "rails" ] && [ "${4}" == "server" ]; then
+  ./bin/rails db:prepare
+fi
+
+if [ "${1}" == "bundle" ] && [ "${2}" == "exec" ] && [ "${3}" == "puma" ]; then
   ./bin/rails db:prepare
 fi
 
