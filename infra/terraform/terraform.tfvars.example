@@ -1,0 +1,12 @@
+aws_region            = "ap-northeast-1"
+project_name          = "todo-sample"
+environment           = "prod"
+backend_image_tag     = "latest"
+backend_desired_count = 1
+backend_cpu_architecture = "ARM64"
+db_instance_class     = "db.t4g.micro"
+db_multi_az           = false
+
+common_tags = {
+  Owner = "team-todo"
+}
