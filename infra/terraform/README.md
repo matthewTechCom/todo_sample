@@ -76,6 +76,8 @@ GitHub Actions で deploy する場合は、Terraform を適用して `github_ac
 
 workflow は `.github/workflows/deploy-backend.yml` と `.github/workflows/deploy-frontend.yml` です。どちらも `main` への push と `workflow_dispatch` に対応しています。
 
+OIDC の trust policy は `main` ブランチと `production` environment の両方を許可しています。workflow 側で `environment: production` を使っているため、`sub` claim は branch ではなく `repo:<owner>/<repo>:environment:production` で評価されます。
+
 ## 補足
 
 - CloudFront は 1 つです。通常の画面は S3、`/api/*` と `/api-docs*`、`/up` は ALB にルーティングします

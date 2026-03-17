@@ -28,6 +28,12 @@ variable "github_branch" {
   default     = "main"
 }
 
+variable "github_environment" {
+  description = "GitHub Actions environment name allowed to assume the deployment role."
+  type        = string
+  default     = "production"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for the VPC."
   type        = string
