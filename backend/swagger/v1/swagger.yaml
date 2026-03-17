@@ -103,5 +103,115 @@ paths:
           description: current user fetched
         '401':
           description: unauthorized
+  "/api/v1/todos":
+    get:
+      summary: List todos
+      tags:
+      - Todos
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      produces:
+      - application/json
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: todos fetched
+        '401':
+          description: unauthorized
+    post:
+      summary: Create todo
+      tags:
+      - Todos
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '201':
+          description: todo created
+        '422':
+          description: invalid todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                todo:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    completed:
+                      type: boolean
+                  required:
+                  - title
+              required:
+              - todo
+  "/api/v1/todos/{id}":
+    patch:
+      summary: Update todo
+      tags:
+      - Todos
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: todo updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                todo:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    completed:
+                      type: boolean
+              required:
+              - todo
+    delete:
+      summary: Delete todo
+      tags:
+      - Todos
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '204':
+          description: todo deleted
 servers:
 - url: http://localhost:3001
