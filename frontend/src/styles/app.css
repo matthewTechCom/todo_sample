@@ -1,0 +1,360 @@
+:root {
+  --paper: rgba(255, 251, 245, 0.92);
+  --ink: #1a1815;
+  --muted: #685f56;
+  --line: rgba(64, 48, 32, 0.16);
+  --accent: #c75d2c;
+  --accent-deep: #7b2f1f;
+  --success: #2f7a48;
+  --error: #a93a2c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  color: var(--ink);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(199, 93, 44, 0.22), transparent 38%),
+    radial-gradient(circle at right 15%, rgba(97, 58, 27, 0.18), transparent 24%),
+    linear-gradient(135deg, #f7f0e6 0%, #efe5d6 54%, #e9dfd0 100%);
+}
+
+.app-panel {
+  width: min(100%, 720px);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  backdrop-filter: blur(18px);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 246, 0.96), rgba(248, 240, 227, 0.92)),
+    var(--paper);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.app-panel.narrow {
+  width: min(100%, 560px);
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panel-label {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+.panel-title {
+  margin: 0.35rem 0 0;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+}
+
+.panel-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.field-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.field-list.two-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(97, 58, 27, 0.12);
+  background: rgba(255, 255, 255, 0.58);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.field strong {
+  font-size: 1rem;
+}
+
+.mode-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  padding: 0.3rem;
+  border-radius: 18px;
+  border: 1px solid rgba(85, 56, 32, 0.14);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.mode-button,
+.primary-button,
+.secondary-button,
+.ghost-button,
+.danger-button,
+.text-link {
+  font: inherit;
+}
+
+.mode-button {
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.mode-button.is-active {
+  background: #fff8f1;
+  color: var(--ink);
+}
+
+.auth-form,
+.todo-form,
+.stack-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.auth-form label,
+.todo-input-wrap,
+.stack-form label {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.auth-form span,
+.todo-input-wrap span,
+.stack-form span {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.auth-form input,
+.todo-input-wrap input,
+.stack-form input,
+.todo-edit-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(85, 56, 32, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  font: inherit;
+}
+
+.todo-form {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button,
+.danger-button {
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+}
+
+.primary-button {
+  border: none;
+  background: linear-gradient(135deg, #c75d2c 0%, #874022 100%);
+  color: #fff8f1;
+}
+
+.secondary-button {
+  border: 1px solid rgba(85, 56, 32, 0.14);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+}
+
+.ghost-button {
+  border: 1px solid rgba(85, 56, 32, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--ink);
+}
+
+.danger-button {
+  border: 1px solid rgba(169, 58, 44, 0.18);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--error);
+}
+
+.small-button {
+  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toolbar.spread {
+  justify-content: space-between;
+}
+
+.todo-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.todo-section-head p,
+.todo-section-head span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.todo-item,
+.todo-empty {
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(97, 58, 27, 0.12);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.todo-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+}
+
+.todo-main {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.todo-check {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.todo-title {
+  overflow-wrap: anywhere;
+}
+
+.todo-title.is-completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo-actions,
+.todo-edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.todo-actions {
+  align-self: start;
+}
+
+.todo-edit-form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.feedback {
+  min-height: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.feedback.success {
+  color: var(--success);
+}
+
+.feedback.error {
+  color: var(--error);
+}
+
+.feedback.neutral {
+  color: var(--muted);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--accent-deep);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .app-panel {
+    padding: 1.25rem;
+  }
+
+  .panel-head,
+  .toolbar.spread,
+  .todo-form,
+  .field-list.two-columns,
+  .todo-item {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .panel-head,
+  .toolbar.spread {
+    align-items: stretch;
+  }
+}
