@@ -1,6 +1,8 @@
 aws_region            = "ap-northeast-1"
 project_name          = "todo-sample"
 environment           = "prod"
+github_repository     = "matthewTechCom/todo_sample"
+github_branch         = "main"
 backend_image_tag     = "latest"
 backend_desired_count = 1
 backend_cpu_architecture = "ARM64"

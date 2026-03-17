@@ -16,6 +16,18 @@ variable "environment" {
   default     = "prod"
 }
 
+variable "github_repository" {
+  description = "GitHub repository in owner/name format allowed to assume the deployment role."
+  type        = string
+  default     = "matthewTechCom/todo_sample"
+}
+
+variable "github_branch" {
+  description = "GitHub branch allowed to assume the deployment role."
+  type        = string
+  default     = "main"
+}
+
 variable "vpc_cidr" {
   description = "CIDR block for the VPC."
   type        = string

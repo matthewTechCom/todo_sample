@@ -32,3 +32,23 @@ output "backend_alb_dns_name" {
   description = "Backend ALB DNS name used as the CloudFront origin."
   value       = aws_lb.backend.dns_name
 }
+
+output "backend_ecs_cluster_name" {
+  description = "ECS cluster name for the Rails backend."
+  value       = aws_ecs_cluster.main.name
+}
+
+output "backend_ecs_service_name" {
+  description = "ECS service name for the Rails backend."
+  value       = aws_ecs_service.backend.name
+}
+
+output "backend_ecs_task_definition_family" {
+  description = "ECS task definition family for the Rails backend."
+  value       = aws_ecs_task_definition.backend.family
+}
+
+output "github_actions_role_arn" {
+  description = "IAM role ARN for GitHub Actions OIDC deployments."
+  value       = aws_iam_role.github_actions.arn
+}

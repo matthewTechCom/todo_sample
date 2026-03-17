@@ -49,6 +49,33 @@ aws s3 sync dist/ s3://<frontend-bucket-name> --delete
 aws cloudfront create-invalidation --distribution-id <distribution-id> --paths "/*"
 ```
 
+## GitHub Actions
+
+GitHub Actions で deploy する場合は、Terraform を適用して `github_actions_role_arn` を作成したうえで、GitHub repository variables か `production` environment variables に次を設定します。
+
+- `AWS_REGION`
+- `AWS_ROLE_ARN`
+- `BACKEND_ECR_REPOSITORY_URL`
+- `ECS_CLUSTER_NAME`
+- `ECS_SERVICE_NAME`
+- `ECS_TASK_DEFINITION_FAMILY`
+- `FRONTEND_BUCKET_NAME`
+- `CLOUDFRONT_DISTRIBUTION_ID`
+- `PUBLIC_API_BASE_URL`
+
+対応する Terraform output は次です。
+
+- `AWS_ROLE_ARN`: `github_actions_role_arn`
+- `BACKEND_ECR_REPOSITORY_URL`: `backend_ecr_repository_url`
+- `ECS_CLUSTER_NAME`: `backend_ecs_cluster_name`
+- `ECS_SERVICE_NAME`: `backend_ecs_service_name`
+- `ECS_TASK_DEFINITION_FAMILY`: `backend_ecs_task_definition_family`
+- `FRONTEND_BUCKET_NAME`: `frontend_bucket_name`
+- `CLOUDFRONT_DISTRIBUTION_ID`: `frontend_distribution_id`
+- `PUBLIC_API_BASE_URL`: `backend_url`
+
+workflow は `.github/workflows/deploy-backend.yml` と `.github/workflows/deploy-frontend.yml` です。どちらも `main` への push と `workflow_dispatch` に対応しています。
+
 ## 補足
 
 - CloudFront は 1 つです。通常の画面は S3、`/api/*` と `/api-docs*`、`/up` は ALB にルーティングします
