@@ -1,0 +1,10 @@
+---
+import CouponDetailPage from '../../components/CouponDetailPage';
+import Layout from '../../layouts/Layout.astro';
+
+const apiBaseUrl = import.meta.env.PUBLIC_API_BASE_URL ?? 'http://localhost:3001';
+---
+
+<Layout title="Konbini Coupons | Detail">
+	<CouponDetailPage client:load apiBaseUrl={apiBaseUrl} />
+</Layout>

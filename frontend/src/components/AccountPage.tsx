@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { apiFetch, clearSession, readToken, readUser, type SessionUser } from "../lib/session";
+import AppHeader from "./AppHeader";
 
 type AccountPageProps = {
   apiBaseUrl: string;
@@ -30,21 +31,24 @@ export default function AccountPage({ apiBaseUrl }: AccountPageProps) {
   };
 
   return (
-    <div className="app-shell">
-      <section className="app-panel narrow">
+    <div className="coupon-shell">
+      <section className="coupon-frame account-frame">
+        <AppHeader
+          menuItems={[
+            {
+              label: "ログアウト",
+              onClick: () => {
+                void handleLogout();
+              },
+              tone: "danger",
+            },
+          ]}
+        />
+
         <div className="panel-head">
           <div>
             <p className="panel-label">Account</p>
-            <h1 className="panel-title">アカウント設定</h1>
-            <p className="panel-subtitle">登録済みのアカウント情報を確認できます。</p>
-          </div>
-          <div className="toolbar">
-            <button className="secondary-button" type="button" onClick={() => (window.location.href = "/todo")}>
-              Todo一覧
-            </button>
-            <button className="ghost-button" type="button" onClick={handleLogout}>
-              ログアウト
-            </button>
+            <h1 className="panel-title">アカウント情報</h1>
           </div>
         </div>
 
@@ -57,6 +61,12 @@ export default function AccountPage({ apiBaseUrl }: AccountPageProps) {
             <span>ユーザーID</span>
             <strong>{user?.id ?? "-"}</strong>
           </div>
+        </div>
+
+        <div className="account-footer">
+          <button className="text-link" type="button" onClick={() => void handleLogout()}>
+            ログアウト
+          </button>
         </div>
       </section>
     </div>

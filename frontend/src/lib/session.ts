@@ -3,17 +3,27 @@ export type SessionUser = {
   email: string;
 };
 
-export type Todo = {
+export type CouponListItem = {
   id: number;
+  slug: string;
   title: string;
-  completed: boolean;
-  created_at: string;
-  updated_at: string;
+  brand_name: string;
+  category: string;
+  discount_text: string;
+  description: string;
+  image_url: string;
+  starts_at: string;
+  ends_at: string;
+  freshness_ratio: number;
+};
+
+export type CouponDetail = CouponListItem & {
+  terms_and_conditions: string;
 };
 
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const TOKEN_KEY = "todo-sample-token";
-const USER_KEY = "todo-sample-user";
+const TOKEN_KEY = "coupon-sample-token";
+const USER_KEY = "coupon-sample-user";
 
 const isBrowser = () => typeof document !== "undefined";
 

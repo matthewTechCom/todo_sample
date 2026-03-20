@@ -32,7 +32,7 @@ export default function AuthPage({ apiBaseUrl }: AuthPageProps) {
 
   useEffect(() => {
     if (readToken()) {
-      window.location.replace("/todo");
+      window.location.replace("/coupons");
     }
   }, []);
 
@@ -61,7 +61,7 @@ export default function AuthPage({ apiBaseUrl }: AuthPageProps) {
       }
 
       persistSession(token, payload.user);
-      window.location.href = "/todo";
+      window.location.href = "/coupons";
     } catch (error) {
       console.error(error);
       setFeedback({ message: "ログインAPIへの接続に失敗しました。", kind: "error" });
@@ -108,7 +108,7 @@ export default function AuthPage({ apiBaseUrl }: AuthPageProps) {
       }
 
       persistSession(token, payload.user);
-      window.location.href = "/todo";
+      window.location.href = "/coupons";
     } catch (error) {
       console.error(error);
       setFeedback({ message: "登録APIへの接続に失敗しました。", kind: "error" });
@@ -121,7 +121,8 @@ export default function AuthPage({ apiBaseUrl }: AuthPageProps) {
         <div className="panel-head">
           <div>
             <p className="panel-label">Auth</p>
-            <h1 className="panel-title">アカウント</h1>
+            <h1 className="panel-title">Konbini Coupons</h1>
+            <p className="panel-subtitle">ログインすると、今日配信中のクーポン一覧へ移動します。</p>
           </div>
           <div className="mode-switch" role="tablist" aria-label="認証モード切替">
             <button
