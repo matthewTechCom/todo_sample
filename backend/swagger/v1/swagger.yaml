@@ -10,6 +10,125 @@ components:
       scheme: bearer
       bearerFormat: JWT
 paths:
+  "/api/debug/db-error":
+    post:
+      summary: Trigger a database error with invalid SQL
+      tags:
+      - Debug
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '500':
+          description: database error triggered
+        '401':
+          description: unauthorized
+  "/api/debug/timeout":
+    post:
+      summary: Sleep long enough to simulate timeout handling
+      tags:
+      - Debug
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '504':
+          description: timeout simulated
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                seconds:
+                  type: integer
+  "/api/debug/memory-leak":
+    post:
+      summary: Retain process memory to simulate leak and OOM pressure
+      tags:
+      - Debug
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '500':
+          description: memory leak simulated
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                megabytes:
+                  type: integer
+  "/api/debug/500":
+    post:
+      summary: Return an intentional internal server error
+      tags:
+      - Debug
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerAuth: []
+      responses:
+        '500':
+          description: internal server error returned
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+  "/api/debug/n-plus-one":
+    get:
+      summary: Intentionally trigger N+1 queries
+      tags:
+      - Debug
+      parameters:
+      - name: Authorization
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: n plus one query pattern executed
+        '401':
+          description: unauthorized
   "/api/v1/auth/signup":
     post:
       summary: Sign up user and return JWT
