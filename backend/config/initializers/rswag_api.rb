@@ -1,6 +1,5 @@
 if defined?(Rswag::Api)
   Rswag::Api.configure do |c|
-
     # Specify a root folder where Swagger JSON files are located
     # This is used by the Swagger middleware to serve requests for API descriptions
     # NOTE: If you're using rswag-specs to generate Swagger, you'll need to ensure

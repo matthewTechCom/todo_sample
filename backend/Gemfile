@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
@@ -52,12 +53,12 @@ gem "devise-jwt", "~> 0.13.0"
 
 gem "rack-cors", "~> 3.0"
 
-gem "minitest", "~> 5.25", :groups => [:development, :test]
+gem "minitest", "~> 5.25", groups: [:development, :test]
 
-gem "rspec-rails", "~> 7.1", :groups => [:development, :test]
+gem "rspec-rails", "~> 7.1", groups: [:development, :test]
 
-gem "rswag-specs", "~> 2.17", :groups => [:development, :test]
+gem "rswag-specs", "~> 2.17", groups: [:development, :test]
 
-gem "rswag-api", "~> 2.17", :groups => [:development, :test]
+gem "rswag-api", "~> 2.17", groups: [:development, :test]
 
-gem "rswag-ui", "~> 2.17", :groups => [:development, :test]
+gem "rswag-ui", "~> 2.17", groups: [:development, :test]
