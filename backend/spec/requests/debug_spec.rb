@@ -69,21 +69,6 @@ RSpec.describe "Debug API", type: :request do
     end
   end
 
-  describe "GET /api/debug/n-plus-one" do
-    it "intentionally triggers N+1 queries" do
-      3.times { |index| user.todos.create!(title: "todo #{index}") }
-
-      get "/api/debug/n-plus-one", params: { limit: 3 }, headers: headers
-
-      expect(response).to have_http_status(:ok)
-
-      body = JSON.parse(response.body)
-      expect(body["todos"].size).to eq(3)
-      expect(body.dig("meta", "query_count")).to eq(4)
-      expect(body["todos"].map { |todo| todo["owner_email"] }.uniq).to eq([user.email])
-    end
-  end
-
   describe "authentication" do
     it "requires a valid bearer token" do
       post "/api/debug/500", as: :json

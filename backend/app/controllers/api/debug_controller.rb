@@ -60,31 +60,6 @@ module Api
       }, status: :internal_server_error
     end
 
-    def n_plus_one
-      limit = bounded_integer_param(:limit, default: 25, min: 1, max: 100)
-      todos = nil
-
-      query_count = count_sql_queries do
-        todos = Todo.where(user_id: current_user.id).order(created_at: :desc).limit(limit).map do |todo|
-          {
-            id: todo.id,
-            title: todo.title,
-            completed: todo.completed,
-            owner_email: User.uncached { User.find(todo.user_id).email }
-          }
-        end
-      end
-
-      render json: {
-        todos: todos,
-        meta: {
-          todo_count: todos.length,
-          query_count: query_count,
-          note: "Includes one todo query and one user lookup per todo."
-        }
-      }, status: :ok
-    end
-
     private
 
     def render_debug_error(error:, message:, details:)
@@ -100,26 +75,6 @@ module Api
       value.clamp(min, max)
     rescue ArgumentError, TypeError
       default
-    end
-
-    def count_sql_queries
-      queries = 0
-
-      callback = lambda do |_name, _start, _finish, _id, payload|
-        sql = payload[:sql].to_s
-
-        next if payload[:cached]
-        next if payload[:name] == "SCHEMA"
-        next if sql.match?(/\A(?:BEGIN|COMMIT|ROLLBACK|SAVEPOINT|RELEASE SAVEPOINT)/i)
-
-        queries += 1
-      end
-
-      ActiveSupport::Notifications.subscribed(callback, "sql.active_record") do
-        yield
-      end
-
-      queries
     end
 
     def retained_megabytes

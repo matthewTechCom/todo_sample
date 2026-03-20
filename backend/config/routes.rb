@@ -19,11 +19,10 @@ Rails.application.routes.draw do
     post "debug/timeout", to: "debug#timeout"
     post "debug/memory-leak", to: "debug#memory_leak"
     post "debug/500", to: "debug#internal_server_error"
-    get "debug/n-plus-one", to: "debug#n_plus_one"
 
     namespace :v1 do
       get "me", to: "me#show"
-      resources :todos, only: %i[index create update destroy]
+      resources :coupons, only: %i[index show], param: :slug
     end
   end
 
