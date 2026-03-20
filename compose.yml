@@ -18,7 +18,7 @@ services:
       RAILS_ENV: development
       DATABASE_URL: postgresql://postgres:postgres@db:5432/backend_development
     volumes:
-      - ./backend:/rails
+      - ./backend:/app
       - bundle_data:/usr/local/bundle
     ports:
       - "3001:3000"
