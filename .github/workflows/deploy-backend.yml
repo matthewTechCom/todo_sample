@@ -42,6 +42,16 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
 
+      - name: Debug AWS caller identity
+        run: aws sts get-caller-identity
+
+      - name: Debug backend ECR repository
+        run: |
+          echo "AWS_REGION=${AWS_REGION}"
+          echo "BACKEND_ECR_REPOSITORY_URL=${BACKEND_ECR_REPOSITORY_URL}"
+          REPOSITORY_NAME="${BACKEND_ECR_REPOSITORY_URL##*/}"
+          aws ecr describe-repositories --repository-names "${REPOSITORY_NAME}"
+
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
